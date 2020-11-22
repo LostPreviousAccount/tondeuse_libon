@@ -16,24 +16,29 @@ public class Position {
     }
 
     public Position deplace(Commande commande) {
-        switch (this.orientation) {
-            case North:
-                switch (commande) {
-                    case Gauche:
-                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.West);
-                    case Droite:
-                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.East);
-                }
-                return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
-            case East:
-                switch (commande) {
-                    case Gauche:
-                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.North);
-                    case Droite:
-                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.South);
-                }
-                return Position.de(this.coordonnees.x +1, this.coordonnees.y, orientation);
+        if (commande == Commande.Gauche) {
+            return tournerAGauche();
         }
-        return null;
+        if (commande == Commande.Droite) {
+            return tournerADroite();
+        }
+        else {
+            switch (this.orientation) {
+                case North:
+                    return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
+                case East:
+                    return Position.de(this.coordonnees.x + 1, this.coordonnees.y, orientation);
+            }
+            return this; //en attendant que le switch soit complet
+        }
     }
+
+    private Position tournerADroite() {
+        return Position.de(this.coordonnees.x, this.coordonnees.y, this.orientation.aDroite());
+    }
+
+    private Position tournerAGauche() {
+        return Position.de(this.coordonnees.x, this.coordonnees.y, this.orientation.aGauche());
+    }
+
 }
