@@ -1,5 +1,7 @@
 package com.example.tomdeuse.domain;
 
+import java.util.Objects;
+
 public class Coordonnees {
 
     public final int x;
@@ -8,5 +10,19 @@ public class Coordonnees {
     public Coordonnees(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordonnees that = (Coordonnees) o;
+        return x == that.x &&
+                y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

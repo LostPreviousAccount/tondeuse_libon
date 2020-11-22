@@ -10,4 +10,8 @@ public class Position {
         this.coordonnees = coordonnees;
         this.orientation = orientation;
     }
+
+    public Position deplace(Commande commande) {
+        return new Position(new Coordonnees(this.coordonnees.x, this.coordonnees.y + 1), orientation);
+    }
 }
