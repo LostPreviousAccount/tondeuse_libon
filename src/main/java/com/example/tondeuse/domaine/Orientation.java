@@ -20,19 +20,19 @@ public enum Orientation implements Tournable {
         }
     }, West {
         public Orientation aGauche() {
-            return null;
+            return South;
         }
 
         public Orientation aDroite() {
-            return null;
+            return North;
         }
     }, South {
         public Orientation aGauche() {
-            return null;
+            return East;
         }
 
         public Orientation aDroite() {
-            return null;
+            return West;
         }
     }
 
