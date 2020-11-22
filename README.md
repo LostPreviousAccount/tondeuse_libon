@@ -34,3 +34,9 @@ Etant donné que je suis dans mon domaine, et que je vais le cloisonner, je pren
 Pour la tondeuse, je passe par la lib apache commons pour avoir une réelle notion d'immutabibilité au niveau de la liste de commandes.
 J'ai hésité avec Queue pour montrer le concept de FIFO, mais je repousse ma décision à plus tard...
 Il n'y a pour l'instant aucun comportement.
+
+### Implémentation comportements
+
+*en mode TDD pour changer*
+Je sais que je vais avoir un souci avec la pelouse : je ne sais pas encore à quel niveau l'intégrer. Donc je repousse ça à plus tard, avec l'impact de refacto que cela entrainera.
+Pour l'instant, je vais ne pas la tenir en compte.

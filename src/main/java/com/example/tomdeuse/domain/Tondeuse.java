@@ -13,4 +13,8 @@ public class Tondeuse {
         this.positionInitiale = positionInitiale;
         this.commandes = ListUtils.unmodifiableList(commandes);
     }
+
+    public Position explore() {
+        return positionInitiale;
+    }
 }
