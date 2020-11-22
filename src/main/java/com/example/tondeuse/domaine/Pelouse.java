@@ -2,11 +2,11 @@ package com.example.tondeuse.domaine;
 
 public class Pelouse {
 
-    public final int hauteur;
-    public final int largeur;
+    public final int parallele_max; //x
+    public final int meridien_max; //y
 
-    public Pelouse(int hauteur, int largeur) {
-        this.hauteur = hauteur;
-        this.largeur = largeur;
+    public Pelouse(int max_x, int max_y) {
+        this.parallele_max = max_x;
+        this.meridien_max = max_y;
     }
 }

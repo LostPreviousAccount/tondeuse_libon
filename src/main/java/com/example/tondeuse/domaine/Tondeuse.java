@@ -6,10 +6,12 @@ import java.util.List;
 
 public class Tondeuse {
 
+    public final Pelouse pelouse;
     public final Position positionInitiale;
     public final List<Commande> commandes;
 
-    public Tondeuse(Position positionInitiale, List<Commande> commandes) {
+    public Tondeuse(Pelouse pelouse, Position positionInitiale, List<Commande> commandes) {
+        this.pelouse = pelouse;
         this.positionInitiale = positionInitiale;
         this.commandes = ListUtils.unmodifiableList(commandes);
     }
