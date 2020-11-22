@@ -16,9 +16,24 @@ public class Position {
     }
 
     public Position deplace(Commande commande) {
-        if (commande == Commande.Gauche) {
-                return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.West);
+        switch (this.orientation) {
+            case North:
+                switch (commande) {
+                    case Gauche:
+                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.West);
+                    case Droite:
+                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.East);
+                }
+                return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
+            case East:
+                switch (commande) {
+                    case Gauche:
+                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.North);
+                    case Droite:
+                        return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.South);
+                }
+                return Position.de(this.coordonnees.x +1, this.coordonnees.y, orientation);
         }
-        return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
+        return null;
     }
 }

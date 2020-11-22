@@ -25,4 +25,12 @@ public class Coordonnees {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    @Override
+    public String toString() {
+        return "Coordonnees{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
