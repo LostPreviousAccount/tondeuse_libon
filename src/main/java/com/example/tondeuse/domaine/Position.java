@@ -16,6 +16,9 @@ public class Position {
     }
 
     public Position deplace(Commande commande) {
+        if (commande == Commande.Gauche) {
+                return Position.de(this.coordonnees.x, this.coordonnees.y, Orientation.West);
+        }
         return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
     }
 }
