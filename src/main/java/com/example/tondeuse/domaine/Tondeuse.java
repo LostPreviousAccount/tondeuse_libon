@@ -15,6 +15,10 @@ public class Tondeuse {
     }
 
     public Position explore() {
-        return positionInitiale;
+        Position positionCourante = positionInitiale;
+        for (Commande commande : commandes) {
+            positionCourante = positionCourante.deplace(commande);
+        }
+        return positionCourante;
     }
 }

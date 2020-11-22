@@ -1,6 +1,8 @@
 package com.example.tondeuse.domaine;
 
 
+import java.util.Objects;
+
 public class Position {
 
     public final Coordonnees coordonnees;
@@ -47,5 +49,25 @@ public class Position {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(coordonnees, position.coordonnees) &&
+                orientation == position.orientation;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(coordonnees, orientation);
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "coordonnees=" + coordonnees +
+                ", orientation=" + orientation +
+                '}';
+    }
 }
