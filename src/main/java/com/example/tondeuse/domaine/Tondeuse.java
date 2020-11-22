@@ -1,4 +1,4 @@
-package com.example.tomdeuse.domain;
+package com.example.tondeuse.domaine;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -12,5 +12,13 @@ public class Tondeuse {
     public Tondeuse(Position positionInitiale, List<Commande> commandes) {
         this.positionInitiale = positionInitiale;
         this.commandes = ListUtils.unmodifiableList(commandes);
+    }
+
+    public Position explore() {
+        Position positionCourante = positionInitiale;
+        for (Commande commande : commandes) {
+            positionCourante = positionCourante.deplace(commande);
+        }
+        return positionCourante;
     }
 }

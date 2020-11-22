@@ -1,4 +1,4 @@
-package com.example.tomdeuse.domain;
+package com.example.tondeuse.domaine;
 
 public class Pelouse {
 
