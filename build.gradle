@@ -26,6 +26,7 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
+    compile('org.apache.commons:commons-collections4:4.4')
 }
 
 
