@@ -18,4 +18,14 @@ class TondeuseTest {
 
         assertThat(position).isEqualTo(positionInitiale);
     }
+
+    @Test
+    void tondeuse_une_seule_commande_avancer() {
+        Position positionInitiale = new Position(new Coordonnees(0, 0), Orientation.North);
+        List<Commande> commandes = List.of(Commande.Avancer);
+
+        Position position = new Tondeuse(positionInitiale, commandes).explore();
+
+        assertThat(position).isEqualTo(new Position(new Coordonnees(0, 1), Orientation.North));
+    }
 }
