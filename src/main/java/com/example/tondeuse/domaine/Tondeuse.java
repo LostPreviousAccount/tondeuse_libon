@@ -15,7 +15,7 @@ public class Tondeuse {
     }
 
     public Position explore() {
-        Position positionCourante = positionInitiale;
+        Position positionCourante = positionInitiale; // euh, y'a pas de fold-left en Java ???
         for (Commande commande : commandes) {
             positionCourante = positionCourante.deplace(commande);
         }
