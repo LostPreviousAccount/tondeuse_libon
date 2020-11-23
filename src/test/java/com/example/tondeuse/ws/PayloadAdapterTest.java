@@ -4,6 +4,9 @@ import com.example.tondeuse.domaine.Orientation;
 import com.example.tondeuse.domaine.Position;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static com.example.tondeuse.domaine.Commande.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PayloadAdapterTest {
@@ -28,5 +31,19 @@ class PayloadAdapterTest {
         assertThat(adapter.getPelouse().parallele_max).isEqualTo(2);
         assertThat(adapter.getPelouse().meridien_max).isEqualTo(3);
         assertThat(adapter.getPositions().get(0)).isEqualTo(Position.de(1, 1, Orientation.North));
+    }
+
+    @Test
+    void pelouse_with_1_tondeuse() {
+        String payload = "2 3\n" +
+                "1 1 N\n" +
+                "AGD";
+
+        PayloadAdapter adapter = PayloadAdapter.mapPayloadToDomainModels(payload);
+
+        assertThat(adapter.getPelouse().parallele_max).isEqualTo(2);
+        assertThat(adapter.getPelouse().meridien_max).isEqualTo(3);
+        assertThat(adapter.getPositions().get(0)).isEqualTo(Position.de(1, 1, Orientation.North));
+        assertThat(adapter.getCommandes().get(0)).isEqualTo(List.of(Avancer, Gauche, Droite));
     }
 }
