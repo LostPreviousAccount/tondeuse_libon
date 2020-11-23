@@ -15,18 +15,24 @@ import static com.example.tondeuse.domaine.Orientation.*;
 
 public class PayloadAdapter {
 
-    private Pelouse pelouse;
-    private List<Position> positions;
-    private List<List<Commande>> commandes;
+    public static final String LINE_SEP = "\n";
+    public static final String PELOUSE_SEP = " ";
+    public static final String POSITION_SEP = " ";
+    private final Pelouse pelouse;
+    private final List<Position> positions;
+    private final List<List<Commande>> commandes;
 
     private static final EnumMap<Orientation, String> ORIENTATION_MAP = new EnumMap<>(Orientation.class);
-    //private static final EnumMap<Commande, String> COMMANDE_MAP;
+    private static final EnumMap<Commande, String> COMMANDE_MAP = new EnumMap<>(Commande.class);
 
     static {
         ORIENTATION_MAP.put(North, "N");
         ORIENTATION_MAP.put(South, "S");
         ORIENTATION_MAP.put(East, "E");
         ORIENTATION_MAP.put(West, "W");
+        COMMANDE_MAP.put(Commande.Avancer, "A");
+        COMMANDE_MAP.put(Commande.Gauche, "G");
+        COMMANDE_MAP.put(Commande.Droite, "D");
     }
 
     public PayloadAdapter(Pelouse pelouse, List<Position> positions, List<List<Commande>> commandes) {
@@ -36,32 +42,48 @@ public class PayloadAdapter {
     }
 
     public static PayloadAdapter mapPayloadToDomainModels(String payload) {
-        String[] lines = payload.split("\n");
+        String[] lines = payload.split(LINE_SEP);
         Pelouse pelouse = extractPelouse(lines[0]);
 
-        int nb_tondeuse_to_parse = lines.length - 1;
+        int nbTondeuseToParse = (lines.length - 1) / 2;
         List<Position> positions = new ArrayList<>();
-        for (int i = 0; i < nb_tondeuse_to_parse; i++) {
+        List<List<Commande>> commandesList = new ArrayList<>();
+        for (int i = 0; i < nbTondeuseToParse; i++) {
             Position position = extractPosition(lines[2 * i + 1]);
             positions.add(position);
+            List<Commande> commandes = extractCommandes(lines[2 * i + 2]);
+            positions.add(position);
+            commandesList.add(commandes);
         }
-        return new PayloadAdapter(pelouse, positions, null);
+        return new PayloadAdapter(pelouse, positions, commandesList);
     }
 
     private static Pelouse extractPelouse(String line) {
-        List<Integer> tuple_pelouse = Arrays.stream(line.split(" "))
+        List<Integer> tuple_pelouse = Arrays.stream(line.split(PELOUSE_SEP))
                 .map(s -> Integer.parseInt(s, 10))
                 .collect(Collectors.toList());
         return new Pelouse(tuple_pelouse.get(0), tuple_pelouse.get(1));
     }
 
+    private static List<Commande> extractCommandes(String line) {
+        return line.codePoints()
+                .mapToObj(c -> String.valueOf((char) c))
+                .map(c -> COMMANDE_MAP.entrySet().stream()
+                        .filter(e -> e.getValue().equals(c))
+                        .findFirst().get()
+                        .getKey()).collect(Collectors.toList());
+    }
+
     private static Position extractPosition(String line) {
-        String[] position_to_extract = line.split(" ");
+        String[] positionToExtract = line.split(POSITION_SEP);
         Orientation orientation = ORIENTATION_MAP.entrySet().stream()
-                .filter(e -> e.getValue().equals(position_to_extract[2]))
+                .filter(e -> e.getValue().equals(positionToExtract[2]))
                 .findFirst().get()
                 .getKey();
-        return Position.de(Integer.parseInt(position_to_extract[0], 10), Integer.parseInt(position_to_extract[1], 10), orientation);
+        return Position.de(
+                Integer.parseInt(positionToExtract[0], 10),
+                Integer.parseInt(positionToExtract[1], 10),
+                orientation);
     }
 
     public Pelouse getPelouse() {
