@@ -56,4 +56,7 @@ Donc dans l'ordre, j'aimerais faire :
  7. Ajouter du monitoring healthcheck (je sais même pas si c'est vraiment utile en serverless, mais en standalone ça pourrait l'être)
  8. Des logs, des logs et des logs.
  
- 
+Au final, j'ai fait 1, 3 et 4 et j'ai dépassé l'heure... à cause de :
+ - gradle pas bien configuré
+ - difficultés avec Micronauts et intégration ide (pas lu la doc comme il fallait - RTFM)
+ - encore du mal à revenir vers Java... 
