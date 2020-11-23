@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 
 import javax.inject.Inject;
 
-@MicronautTest
+@MicronautTest(packages = "com.example.tondeuse")
 public class DemoTest {
 
     @Inject

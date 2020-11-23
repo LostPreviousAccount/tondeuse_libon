@@ -42,3 +42,18 @@ Je sais que je vais avoir un souci avec la pelouse : je ne sais pas encore à qu
 Pour l'instant, je vais ne pas la tenir en compte.
 
 Une branche tdd a été créée, elle montre un peu plus de détail sur l'implémentation du déplacement (par contre je n'ai pas non plus fait des micro commit pour montrer que je faisais ça en TDD as u mean it, ce que je ne fais d'ailleurs pas)
+
+### Adapter Http
+
+Je ne connais pas Micronauts, et si j'aurais fait ça en Spring boot, cela fait tellement longtemps que je n'arriverais pas à faire ce que je veux en 1h (temps qui me reste à peu près).
+Donc dans l'ordre, j'aimerais faire :
+ 1. Partir d'un test d'api avec la payload de l'exemple en entrée et la payload de sortie en assert
+ 2. Créer un controller et mock toute la partie domaine
+ 3. Faire la couche d'anticorruption qui va traduire la payload en objet du domaine et l'appeler (via tests aussi)
+ 4. Avoir de quoi tester l'ensemble (avec le serveur lancé et aucun mock)
+ 5. Monter une doc api (swagger ou autre)
+ 6. Ajouter une couche de validation d'input côté controller
+ 7. Ajouter du monitoring healthcheck (je sais même pas si c'est vraiment utile en serverless, mais en standalone ça pourrait l'être)
+ 8. Des logs, des logs et des logs.
+ 
+ 
