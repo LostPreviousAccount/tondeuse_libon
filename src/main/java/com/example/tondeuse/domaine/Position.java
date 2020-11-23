@@ -29,23 +29,23 @@ public class Position {
     }
 
     private Position tournerADroite() {
-        return Position.de(this.coordonnees.x, this.coordonnees.y, this.orientation.aDroite());
+        return new Position(this.coordonnees, this.orientation.aDroite());
     }
 
     private Position tournerAGauche() {
-        return Position.de(this.coordonnees.x, this.coordonnees.y, this.orientation.aGauche());
+        return new Position(this.coordonnees, this.orientation.aGauche());
     }
 
     private Position avance() {
         switch (this.orientation) {
             case North:
-                return Position.de(this.coordonnees.x, this.coordonnees.y + 1, orientation);
+                return new Position(this.coordonnees.allerNord(), this.orientation);
             case South:
-                return Position.de(this.coordonnees.x, this.coordonnees.y - 1, orientation);
+                return new Position(this.coordonnees.allerSud(), this.orientation);
             case East:
-                return Position.de(this.coordonnees.x + 1, this.coordonnees.y, orientation);
+                return new Position(this.coordonnees.allerEst(), this.orientation);
             default:
-                return Position.de(this.coordonnees.x - 1, this.coordonnees.y, orientation);
+                return new Position(this.coordonnees.allerOuest(), this.orientation);
         }
     }
 

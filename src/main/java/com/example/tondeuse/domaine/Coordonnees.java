@@ -12,6 +12,22 @@ public class Coordonnees {
         this.y = y;
     }
 
+    public Coordonnees allerNord() {
+        return new Coordonnees(x, y + 1);
+    }
+
+    public Coordonnees allerSud() {
+        return new Coordonnees(x, y - 1);
+    }
+
+    public Coordonnees allerEst() {
+        return new Coordonnees(x + 1, y);
+    }
+
+    public Coordonnees allerOuest() {
+        return new Coordonnees(x - 1, y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

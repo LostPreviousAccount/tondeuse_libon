@@ -10,8 +10,8 @@ public class Pelouse {
         this.meridien_max = max_y;
     }
 
-    public boolean valide(Position position) {
-        return position.coordonnees.x >= 0 && position.coordonnees.x <= parallele_max &&
-                position.coordonnees.y >= 0 && position.coordonnees.y <= meridien_max;
+    public boolean valide(Coordonnees coordonnees) {
+        return coordonnees.x >= 0 && coordonnees.x <= parallele_max &&
+                coordonnees.y >= 0 && coordonnees.y <= meridien_max;
     }
 }

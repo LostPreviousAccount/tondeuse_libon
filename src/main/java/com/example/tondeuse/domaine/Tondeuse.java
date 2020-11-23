@@ -20,7 +20,7 @@ public class Tondeuse {
         Position positionCourante = positionInitiale; // euh, y'a pas de fold-left en Java ???
         for (Commande commande : commandes) {
             Position nouvellePosition = positionCourante.deplace(commande);
-            if (pelouse.valide(nouvellePosition)) {
+            if (pelouse.valide(nouvellePosition.coordonnees)) {
                 positionCourante = nouvellePosition;
             }
         }
