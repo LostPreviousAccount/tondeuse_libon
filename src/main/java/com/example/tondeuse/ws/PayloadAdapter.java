@@ -2,10 +2,7 @@ package com.example.tondeuse.ws;
 
 import com.example.tondeuse.domaine.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.tondeuse.domaine.Orientation.*;
@@ -17,7 +14,7 @@ public class PayloadAdapter {
     public static final String POSITION_SEP = " ";
 
     private static final EnumMap<Orientation, String> ORIENTATION_MAP = new EnumMap<>(Orientation.class);
-    private static final EnumMap<Commande, String> COMMANDE_MAP = new EnumMap<>(Commande.class);
+    private static final Map<String, Commande> COMMANDE_MAP = new HashMap<>();
     public static final int NB_LINES_TO_PARSE_FOR_TONDEUSE = 2;
     public static final int RADIX = 10;
 
@@ -27,9 +24,9 @@ public class PayloadAdapter {
         ORIENTATION_MAP.put(South, "S");
         ORIENTATION_MAP.put(East, "E");
         ORIENTATION_MAP.put(West, "W");
-        COMMANDE_MAP.put(Commande.Avancer, "A");
-        COMMANDE_MAP.put(Commande.Gauche, "G");
-        COMMANDE_MAP.put(Commande.Droite, "D");
+        COMMANDE_MAP.put("A", Commande.Avancer);
+        COMMANDE_MAP.put("G", Commande.Gauche);
+        COMMANDE_MAP.put("D", Commande.Droite);
     }
 
     public static List<Tondeuse> mapPayloadToTondeuses(String payload) {
@@ -56,10 +53,8 @@ public class PayloadAdapter {
     private static List<Commande> extractCommandes(String line) {
         return line.codePoints()
                 .mapToObj(c -> String.valueOf((char) c))
-                .map(c -> COMMANDE_MAP.entrySet().stream()
-                        .filter(e -> e.getValue().equals(c))
-                        .findFirst().get()
-                        .getKey()).collect(Collectors.toList());
+                .map(COMMANDE_MAP::get)
+                .collect(Collectors.toList());
     }
 
     private static Position extractPosition(String line) {
@@ -72,5 +67,11 @@ public class PayloadAdapter {
                 Integer.parseInt(positionToExtract[0], RADIX),
                 Integer.parseInt(positionToExtract[1], RADIX),
                 orientation);
+    }
+
+    public static String mapPositionsToStringResponse(List<Position> positions) {
+        return positions.stream()
+                .map(p -> p.coordonnees.x + " " + p.coordonnees.y + " "+ ORIENTATION_MAP.get(p.orientation))
+                .collect(Collectors.joining(LINE_SEP));
     }
 }
