@@ -4,7 +4,9 @@ import com.example.tondeuse.domaine.Commande;
 import com.example.tondeuse.domaine.Pelouse;
 import com.example.tondeuse.domaine.Position;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PayloadAdapter {
 
@@ -19,7 +21,12 @@ public class PayloadAdapter {
     }
 
     public static PayloadAdapter mapPayloadToDomainModels(String payload) {
-        return null;
+        String[] lines = payload.split("\n");
+        List<Integer> tuple_pelouse = Arrays.stream(lines[0].split(" "))
+                .map(s -> Integer.parseInt(s, 10))
+                .collect(Collectors.toList());
+        Pelouse pelouse = new Pelouse(tuple_pelouse.get(0), tuple_pelouse.get(1));
+        return new PayloadAdapter(pelouse, null, null);
     }
 
     public Pelouse getPelouse() {
